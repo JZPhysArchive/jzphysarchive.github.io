@@ -517,16 +517,3 @@ window.downloadCourseAsZip = async function(btn, courseCode, prefixPath) {
     btn.innerHTML = oldHtml;
     btn.style.pointerEvents = oldPointer;
 };
-
-// --- MathJax SPA Integration ---
-document.addEventListener('DOMContentLoaded', function() {
-    var appElement = document.getElementById('app');
-    if (appElement) {
-        var observer = new MutationObserver(function() {
-            if (window.MathJax && window.MathJax.typesetPromise) {
-                window.MathJax.typesetPromise().catch(function(err){});
-            }
-        });
-        observer.observe(appElement, { childList: true, subtree: true });
-    }
-});

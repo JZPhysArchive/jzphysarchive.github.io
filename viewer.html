@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prohlížeč PDF | JZPhysArchive</title>
-    <link rel="icon" type="image/png" href="JZ.png">
+    <link rel="icon" type="image/png" href="JZ_rounded.png">
     <style>
         body, html { margin: 0; padding: 0; height: 100%; overflow: hidden; background-color: #525659; }
         iframe { width: 100%; height: 100%; border: none; }
@@ -35,7 +35,13 @@
         const urlParams = new URLSearchParams(window.location.search);
         const fileUrl = urlParams.get('file');
         if (fileUrl) {
-            document.getElementById('pdf-frame').src = fileUrl;
+            const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            if (isMobile) {
+                // Redirect directly to the PDF for mobile browsers
+                window.location.replace(fileUrl);
+            } else {
+                document.getElementById('pdf-frame').src = fileUrl;
+            }
         } else {
             document.body.innerHTML = '<h2 style="font-family:sans-serif; text-align:center; margin-top:20%; color:white;">Soubor nenalezen</h2>';
         }

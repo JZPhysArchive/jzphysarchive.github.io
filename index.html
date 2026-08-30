@@ -312,5 +312,23 @@
     </script>
     <script src="app.js"></script>
     <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "7fa28d5d4d1444519803b0365a75b4f6"}'></script><!-- End Cloudflare Web Analytics -->
+    
+    <script>
+        // Force GoatCounter to listen to hash changes for our SPA
+        window.goatcounter = {no_onload: true};
+        window.addEventListener('hashchange', function(e) {
+            window.goatcounter.count({
+                path: location.pathname + location.search + location.hash,
+            });
+        });
+        window.addEventListener('load', function() {
+            window.goatcounter.count({
+                path: location.pathname + location.search + location.hash,
+            });
+        });
+    </script>
+    <script data-goatcounter="https://jzphysarchive.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+    
 </body>
 </html>

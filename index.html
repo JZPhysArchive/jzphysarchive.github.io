@@ -21,15 +21,22 @@
     <link rel="stylesheet" href="style.css?v=2">
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
 
-    <script>
-    MathJax = {
+        <script>
+    window.MathJax = {
       tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']],
-        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+        inlineMath: [['$', '$'], ['\(', '\)']],
+        displayMath: [['$$', '$$'], ['\[', '\]']]
       },
       startup: {
         typeset: false
       }
+    };
+    
+    let mjPromise = Promise.resolve();
+    window.triggerMathJax = function() {
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            mjPromise = mjPromise.then(() => window.MathJax.typesetPromise()).catch((err) => console.log(err));
+        }
     };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
